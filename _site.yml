@@ -1,0 +1,27 @@
+name: "Si-Chong Chen"
+title: "Si-Chong Chen"
+description: "Homepage for Si-Chong Chen's Lab."
+output_dir: "."
+navbar:
+  title: <p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p>
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Team"
+      href: team.html
+    - text: "Publications"
+      href: publications.html
+    - text: "Join us"
+      href: opportunities.html
+    - text: "Data"
+      href: data.html
+    - text: "中文"
+      href: cn.html
+      
+output:
+  html_document:
+    theme: readable
+    highlight: textmate
+    include:
+#      in_header: header.html
+      after_body: footer.html

@@ -1,0 +1,4156 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> </title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"> </h1>
+
+</div>
+
+
+<div style="text-align:center; margin-top:30px; margin-bottom:30px;">
+<p><img src="Picture/Keywords.jpg" style="width:500px; border-radius:10px;"></p>
+</div>
+<hr>
+<div id="featured-publications" class="section level3">
+<h3>Featured Publications</h3>
+<p>See also: <a
+href="https://www.researchgate.net/profile/Si-Chong-Chen">ResearchGate</a>
+| <a href="https://orcid.org/0000-0002-6855-2595">ORCID</a> | <a
+href="https://scholar.google.com/citations?hl=zh-CN&amp;user=BcKbEYsAAAAJ">Google
+Scholar</a><br></p>
+<p><br></p>
+<p><code>*</code>: Corresponding author; <code>#</code>: Co-first
+author.</p>
+<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+<ul style="list-style-type: disc;">
+<div class="row">
+<div class="col-md-10">
+<li>
+Poschlod P*, Mašková T*, <strong>Chen S-C</strong>, Phartyal SS, Rosbakh
+S, Silveira FAO, Saatkamp A, Dalling JW, Dalziell E, Dickie JB,
+Fernandez-Pascual E, Guja L, Jimenez-Alfaro B, Merritt DJ, Ooi MKJ,
+Vandelook P. (2026) A handbook for standardised measurements of
+regenerative plant functional traits. <em>Australian Journal of
+Botany</em> 74(2): BT25074. <a
+href="https://doi.org/10.1071/BT25074">https://doi.org/10.1071/BT25074</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1071/BT25074"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1071/BT25074"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Xie L</strong>#, <strong>Huang X</strong>#, <strong>Xia
+T</strong>, <strong>Wu L</strong> &amp; <strong>Chen S-C</strong>*.
+(2026) Large old trees sustain avian communities and critical plant-bird
+interactions in highly urbanised environments. <em>Biological
+Conservation</em> 313: 111582. <a
+href="https://doi.org/10.1016/j.biocon.2025.111582">https://doi.org/10.1016/j.biocon.2025.111582</a>
+(Media: <a
+href="https://m.chinanews.com/wap/detail/chs/zw/10509715.shtml">中新网</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.biocon.2025.111582"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.biocon.2025.111582"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Huang X</strong> &amp; <strong>Chen S-C</strong>*. (2025) Humans
+perceive but animals don’t: Pitfalls in using plasticine models for
+assessing biotic interactions. <em>Proceedings of the Royal Society
+B</em> 292(2057): 20252247. <a
+href="https://doi.org/10.1098/rspb.2025.2247">https://doi.org/10.1098/rspb.2025.2247</a>
+(Media: <a
+href="https://news.hubeidaily.net/hbrbsharenew/news_detail/5/4687350/4209654/0?w=1761217803731&amp;uik=8XPWnXgK&amp;share_plat=wechat&amp;sec=26127815&amp;contentType=5&amp;tencentShare=1&amp;historyback=1">湖北日报</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1098/rspb.2025.2247"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1098/rspb.2025.2247"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Fu Z#, Zhan Q#, Lenoir J#, Wang S, Qian H, Yang J, Sun W, Mbuni YM,
+Ngumbau VM, Hu G, Yan X, Wang Q-F, <strong>Chen S-C</strong>* &amp; Zhou
+Y*. (2025) Climate change drives plant diversity attrition at the summit
+of Mount Kenya. <em>New Phytologist</em>. (In press) <a
+href="https://doi.org/10.1111/nph.20344">https://doi.org/10.1111/nph.20344</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/nph.20344"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/nph.20344"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Wang H-Y</strong>, <strong>Chen X</strong>, <strong>Chen
+S-C</strong>*. (2025) Chinese Seed Trait Database: A curated resource
+for seed traits in the Chinese flora. <em>New Phytologist</em> 248(1):
+11–16 (<a
+href="https://nph.onlinelibrary.wiley.com/toc/14698137/2025/248/1"><strong>Cover
+Story</strong></a>) <a
+href="https://doi.org/10.1111/nph.70296">https://doi.org/10.1111/nph.70296</a>
+(Media: <a
+href="https://www.eurekalert.org/news-releases/1087365">EurekAlert!</a>,
+<a
+href="https://news.gmw.cn/2025-06/14/content_38090073.htm">光明日报</a>,
+<a
+href="https://www.chinanews.com.cn/gn/2025/06-13/10431768.shtml">中新网</a>,
+<a
+href="https://phys.org/news/2025-06-database-bridges-global-gaps-trait.html">Phys.org</a>,
+<a
+href="https://www.cas.cn/syky/202506/t20250613_5072972.shtml">中国科学院</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/nph.70296"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/nph.70296"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Barrero JM, Buitink J, <strong>Chen S-C</strong>, da Silva EAA, Hay F,
+Leprince O, Pawłowski TA, Pérez HE, Vijay D. (2025) Celebrating the 25th
+Anniversary of the International Society for Seed Science. <em>Seed
+Science Research</em> 1–8. <a
+href="https://doi.org/10.1017/S0960258525000029">https://doi.org/10.1017/S0960258525000029</a>
+(Editorial)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1017/S0960258525000029"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1017/S0960258525000029"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Wan J-N, Wang S-W, <strong>Chen S-C</strong> &amp; Wan T*. (2025)
+Escarpment evolution in Madagascar unveils a pathway to understanding
+island biodiversity. <em>Journal of Systematics and Evolution</em>
+63(2): 205–207. <a
+href="https://doi.org/10.1111/jse.13162">https://doi.org/10.1111/jse.13162</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/jse.13162"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/jse.13162"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Antonelli A, <strong>Huang X</strong>, Wei
+N, Dai C &amp; Wang Q*. (2025) Large seeds as a defensive strategy
+against partial granivory in the Fagaceae. <em>Journal of Ecology</em>
+113(3): 598–607. <a
+href="https://doi.org/10.1111/1365-2745.14480">https://doi.org/10.1111/1365-2745.14480</a>
+(Media: <a
+href="https://www.eurekalert.org/news-releases/1071421">EurekAlert!</a>,
+<a
+href="https://jecologyblog.com/2025/02/18/big-seeds-are-smarter-than-they-look/">Journal
+of Ecology Blog</a>, <a
+href="https://english.cas.cn/newsroom/research_news/life/202501/t20250122_899111.shtml">中国科学院</a>,
+<a
+href="https://news.hubeidaily.net/hbrbsharenew/news_detail/5/3653863/3306030/0?w=1739884983573%3Fuik%3DWXQ6wh4n&amp;share_plat=wechat&amp;sec=176f59d5&amp;uik=8W6WKjLo&amp;contentType=5">湖北日报</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/1365-2745.14480"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1111/1365-2745.14480"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Huang X</strong>, Dalsgaard B &amp; <strong>Chen S-C</strong>*.
+(2025) Weaker plant-frugivore trait matching towards the tropics and on
+islands. <em>Ecology Letters</em> 28(1): e70061. <a
+href="https://doi.org/10.1111/ele.70061">https://doi.org/10.1111/ele.70061</a>
+(Media: <a
+href="https://english.cas.cn/newsroom/research_news/life/202502/t20250213_901667.shtml">中国科学院</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/ele.70061"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/ele.70061"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Carta A*, Vandelook F, Ramírez-Barahona S, <strong>Chen S-C</strong>,
+Dickie J, Steinbrecher T, Thanos CA, Moles AT, Leubner-Metzger G &amp;
+Mattana E. (2024) The seed morphospace, a new contribution towards the
+multidimensional study of angiosperm sexual reproductive biology.
+<em>Annals of Botany</em> 134(5): 701–710. <a
+href="https://doi.org/10.1093/aob/mcae099">https://doi.org/10.1093/aob/mcae099</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1093/aob/mcae099"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1093/aob/mcae099" data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Wan J-N#, Wang S-W#, Leitch AR, Leitch IJ, Jian J-B, Wu Z-Y, Xin H-P,
+Rakotoarinivo M, Onjalalaina GE, Gituru RW, Dai C, Mwachala G, Bai M-Z,
+Zhao C-X, Wang H-Q, Du S-L, Wei N, Hu G-W, <strong>Chen S-C</strong>,
+Chen X-Y, Wan T* &amp; Wang Q-F*. (2024) The rise of baobab trees in
+Madagascar. <em>Nature</em> 629:1091–1099. <a
+href="https://doi.org/10.1038/s41586-024-07447-4">https://doi.org/10.1038/s41586-024-07447-4</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1038/s41586-024-07447-4"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1038/s41586-024-07447-4"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Wu L-M</strong>, <strong>Chen S-C</strong>, Quan R-C &amp; Wang
+B*. (2024) Disentangling the relative contributions of factors
+determining seed physical defence: A global-scale data synthesis.
+<em>Functional Ecology</em> 38(5), 1146–1155. <a
+href="https://doi.org/10.1111/1365-2435.14552">https://doi.org/10.1111/1365-2435.14552</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/1365-2435.14552"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1111/1365-2435.14552"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>, Hu X-W*, Baskin CC &amp; Baskin JM. (2024) A
+long-term experiment reveals no trade-off between seed persistence and
+seedling emergence. <em>New Phytologist</em> 241(2): 623–631.
+(Commentary on this article by Meitzel, 241(2): 521–522. <a
+href="https://doi.org/10.1111/nph.19350">https://doi.org/10.1111/nph.19350</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/nph.19350"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/nph.19350"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, <strong>Hu Z-A</strong> &amp; Dai C. (2023)
+Unveiling human impacts on pollinators and pollination in the
+urbanisation era. <em>Integrative Zoology</em> 18(6): 1108–1110. <a
+href="https://doi.org/10.1111/1749-4877.12760">https://doi.org/10.1111/1749-4877.12760</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/1749-4877.12760"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1111/1749-4877.12760"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Silveira FAO, Fuzessy L, Dayrell RLC, Vandelook F, Vázquez-Ramírez J,
+Tavşanoğlu C, Abedi M, Naidoo S, Acosta-Rojas DC, <strong>Chen
+S-C</strong>, Cruz-Tejada DM, Jayasuryia G, Ordóñez-Parra CA &amp;
+Saatkamp A. (2023) Overcoming major barriers in seed ecology research in
+developing countries. <em>Seed Science Research</em> 33(3):172–181. <a
+href="https://doi.org/10.1017/S0960258523000181">https://doi.org/10.1017/S0960258523000181</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1017/S0960258523000181"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1017/S0960258523000181"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Fuji A*, Kusumoto B, Shiono T, Kubota Y*, Ulrich W, Dickie JB &amp;
+<strong>Chen S-C</strong>. (2023) Geographic patterns of seed dormancy
+strategies along latitudinal and climatic gradients, Japanese East Asian
+islands. <em>Japanese Journal of Statistics and Data Science</em> 6:
+885–901. <a
+href="https://doi.org/10.1007/s42081-023-00215-0">https://doi.org/10.1007/s42081-023-00215-0</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1007/s42081-023-00215-0"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1007/s42081-023-00215-0"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Yan K#, Luo Y-H#, Li Y-J, Du L-P, Gui H* &amp; <strong>Chen
+S-C</strong>*. (2023) Trajectories of soil microbial recovery in
+response to restoration strategies in one of the largest and oldest
+open-pit phosphate mine in Asia. <em>Ecotoxicology and Environmental
+Safety</em> 262: 115215. <a
+href="https://doi.org/10.1016/j.ecoenv.2023.115215">https://doi.org/10.1016/j.ecoenv.2023.115215</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.ecoenv.2023.115215"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.ecoenv.2023.115215"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Fernández-Pascual E, Carta A, Rosbakh S, Guja L, Phartyal S, Silveira F,
+<strong>Chen S-C</strong>, Larson J &amp; Jiménez-Alfaro B. (2023)
+SeedArc, a global archive of primary seed germination data. <em>New
+Phytologist</em> 240(2): 466–470. <a
+href="https://doi.org/10.1111/nph.19143">https://doi.org/10.1111/nph.19143</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/nph.19143"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/nph.19143"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Everingham S, <strong>Chen S-C</strong>, Lewandrowski W &amp;
+Plumanns-Pouton E. (2023) Novel and emerging seed science research from
+early to middle career researchers at the Australasian Seed Science
+Conference, 2021. <em>Australian Journal of Botany</em> 71(7): 371–378.
+(Invited paper) <a
+href="https://doi.org/10.1071/BT22101">https://doi.org/10.1071/BT22101</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1071/BT22101"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1071/BT22101"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zhang H-X, <strong>Chen S-C</strong>*, Bonser SP, Hitchcock TD &amp;
+Moles AT. (2023) Factors that shape large-scale gradients in
+reproductive mode selection. <em>Journal of Biogeography</em> 50(5):
+827–837. (<a
+href="https://journalofbiogeographynews.org/2023/04/05/plant-reproductive-mode">Editors’
+Choice</a>)
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/jbi.14583"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/jbi.14583"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zi H, Jing X, Liu A, Fan X, <strong>Chen S-C</strong>, Wang H* &amp; He
+J-S. (2023) Simulated climate warming decreases fruit number but
+increases seed mass. <em>Global Change Biology</em> 29(3): 841–855. <a
+href="https://doi.org/10.1111/gcb.16498">https://doi.org/10.1111/gcb.16498</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/gcb.16498"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/gcb.16498"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Wang M, et al. (including <strong>Chen S-C</strong>). (2022). Research
+progress on insect diversity. <em>Biodiversity Science</em> 30(10):22454
+(in Chinese with English Abstract). [王明强 罗阿蓉 周青松 陈婧婷 谢婷婷
+李逸 Douglas Chesters 石晓宇 肖晖 刘桓吉 丁强 周璇 罗一平 路园园 佟一杰
+赵政宇 白明 郭鹏飞 <strong>陈思翀</strong> Akihiro Nakamura 彭艳琼
+赵延会 魏淑花 林晓龙 陈华燕 罗世孝 陆宴辉 鲁亮 余建平 周欣 邹怡 路浩
+朱朝东 (2022) 昆虫多样性30年研究进展. <em>生物多样性</em>, 30, 22454.]
+<a
+href="https://doi.org/10.17520/biods.2022454">https://doi.org/10.17520/biods.2022454</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.17520/biods.2022454"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.17520/biods.2022454"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Njoroge DM, <strong>Chen S-C</strong>, Zuo J*, Dossa GGO* &amp;
+Cornelissen JHC. (2022) Soil fauna accelerate litter mixture
+decomposition globally, especially in dry environments. <em>Journal of
+Ecology</em> 110(3): 659–672. <a
+href="https://doi.org/10.1016/j.geoderma.2025.117312">https://doi.org/10.1016/j.geoderma.2025.117312</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.geoderma.2025.117312"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.geoderma.2025.117312"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zhou Y-D#, Xiao K-Y#, <strong>Chen S-C</strong>, Liu X, Wang Q-F* &amp;
+Yan X*. (2022) Altitudinal diversity of aquatic plants in the
+Qinghai-Tibet Plateau. <em>Freshwater Biology</em> 67(4): 709–719. <a
+href="https://doi.org/10.1111/fwb.13875">https://doi.org/10.1111/fwb.13875</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/fwb.13875"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/fwb.13875"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Wang G, Ives AR, Zhu H, Tan Y, <strong>Chen S-C</strong>, Yang J &amp;
+Wang B*. (2022). Phylogenetic conservatism explains why plants are more
+likely to produce fleshy fruits in the tropics. <em>Ecology</em> 103(1):
+e03555. <a
+href="https://doi.org/10.1002/ecy.3555">https://doi.org/10.1002/ecy.3555</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1002/ecy.3555"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1002/ecy.3555"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Falster D*, et al. (including <strong>Chen S-C</strong>). (2021).
+AusTraits, a curated plant trait database for the Australian flora.
+<em>Scientific Data</em> 8 (1): 1–20. <a
+href="https://doi.org/10.1038/s41597-021-01006-6">https://doi.org/10.1038/s41597-021-01006-6</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1038/s41597-021-01006-6"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1038/s41597-021-01006-6"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Wang B &amp; Moles AT. (2021). Exposure time
+is an important variable in quantifying post-dispersal seed removal.
+<em>Ecology Letters</em> 24(7): 1522–1525. <a
+href="https://doi.org/10.1111/ele.13744">https://doi.org/10.1111/ele.13744</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/ele.13744"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/ele.13744"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Dener E, Ovadia O, Shemesh H, Altman A, <strong>Chen S-C</strong> &amp;
+Giladi I*. (2021). Direct and indirect effects of fragmentation on seed
+dispersal in an agro-ecological landscape. <em>Agriculture, Ecosystems
+and Environment</em> 309: 107273. <a
+href="https://doi.org/10.1016/j.agee.2020.107273">https://doi.org/10.1016/j.agee.2020.107273</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.agee.2020.107273"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.agee.2020.107273"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Poschlod P, Antonelli A, Liu U &amp; Dickie
+JB. (2020). Trade-off between seed dispersal in space and time.
+<em>Ecology Letters</em> 23(11): 1635–1642. <a
+href="https://doi.org/10.1111/ele.13595">https://doi.org/10.1111/ele.13595</a><br />
+
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/ele.13595"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/ele.13595"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, <strong>Wu L-M</strong>, Wang B &amp; Dickie
+JB. (2020). Macroevolutionary patterns in seed component mass and
+different evolutionary trajectories across seed desiccation responses.
+<em>New Phytologist</em> 228(2): 770–777. <a
+href="https://doi.org/10.1111/nph.16706">https://doi.org/10.1111/nph.16706</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/nph.16706"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/nph.16706"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Dener E, Altman A, Chen F &amp; Giladi I.
+(2020). Effect of habitat fragmentation on seed dispersal ability of a
+wind-dispersed annual in an agroecosystem. <em>Agriculture, Ecosystems
+&amp; Environment</em> 304: 107138. <a
+href="https://doi.org/10.1016/j.agee.2020.107138">https://doi.org/10.1016/j.agee.2020.107138</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.agee.2020.107138"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.agee.2020.107138"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Moles AT*, Laffan SW, Keighery M, Dalrymple RL, Tindall ML &amp;
+<strong>Chen S-C</strong>*. (2020). A hairy situation: Plant species in
+warm, sunny places are more likely to have pubescent leaves. <em>Journal
+of Biogeography</em> 47(9): 1934–1944. <a
+href="https://doi.org/10.1111/jbi.13870">https://doi.org/10.1111/jbi.13870</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/jbi.13870"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/jbi.13870"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>* &amp; Giladi I. (2020). Variation in
+morphological traits affects dispersal and seedling emergence in
+dispersive diaspores of Geropogon hybridus. <em>American Journal of
+Botany</em> 107(3): 436–444. <a
+href="https://doi.org/10.1002/ajb2.1430">https://doi.org/10.1002/ajb2.1430</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1002/ajb2.1430"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1002/ajb2.1430"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Kattge J*, et al. (including <strong>Chen S-C</strong>). (2020). TRY
+plant trait database – enhanced coverage and open access. <em>Global
+Change Biology</em> 26(1): 119–188. <a
+href="https://doi.org/10.1111/gcb.14904">https://doi.org/10.1111/gcb.14904</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/gcb.14904"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/gcb.14904"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Pahlevani AH, Malíková L, Riina R, Thomson
+FJ &amp; Giladi I. (2019). Trade-off or coordination? Correlations
+between ballochorous and myrmecochorous phases of diplochory.
+<em>Functional Ecology</em> 33(8): 1469–1479. <a
+href="https://doi.org/10.1111/1365-2435.13353">https://doi.org/10.1111/1365-2435.13353</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/1365-2435.13353"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1111/1365-2435.13353"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Tamme R, Thomson FJ &amp; Moles AT*. (2019).
+Seeds tend to disperse further in the tropics. <em>Ecology Letters</em>
+22(6): 954–961. <a
+href="https://doi.org/10.1111/ele.13255">https://doi.org/10.1111/ele.13255</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/ele.13255"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/ele.13255"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Wu L-M</strong>#, <strong>Chen S-C</strong># &amp; Wang B*.
+(2019). An allometry between seed kernel and seed coat shows greater
+investment in physical defense in small seeds. <em>American Journal of
+Botany</em> 106(3): 371–376. <a
+href="https://doi.org/10.1002/ajb2.1252">https://doi.org/10.1002/ajb2.1252</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1002/ajb2.1252"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1002/ajb2.1252"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Li N*, Wang Z, Li X-H, Yi X-F, Yan C, Lu C-H &amp; <strong>Chen
+S-C</strong>. (2019). Effects of bird traits on seed dispersal of
+endangered Taxus chinensis (Pilger) Rehd. with ex-situ and in-situ
+conservation. <em>Forests</em> 10(9): 790. <a
+href="https://doi.org/10.3390/f10090790">https://doi.org/10.3390/f10090790</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.3390/f10090790"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.3390/f10090790"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Du Y, Yang B, <strong>Chen S-C</strong> &amp; Ma K*. (2019). Diverging
+shifts in spring phenology in response to biodiversity loss in a
+subtropical forest. <em>Journal of Vegetation Science</em> 30(6):
+1175–1183. <a
+href="https://doi.org/10.1111/jvs.12806">https://doi.org/10.1111/jvs.12806</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/jvs.12806"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/jvs.12806"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zhai D-L, Yu H, <strong>Chen S-C</strong>, Ranjitkar S &amp; Xu J*.
+(2019). Responses of rubber leaf phenology to climatic variations in
+Southwest China. <em>International Journal of Biometeorology</em> 63(5):
+607–616. <a
+href="https://doi.org/10.1007/s00484-017-1448-4">https://doi.org/10.1007/s00484-017-1448-4</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1007/s00484-017-1448-4"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1007/s00484-017-1448-4"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Liu J, Tang J, <strong>Chen S-C</strong>, Ma W, Zheng Z &amp; Dong T*.
+(2019). Do tree cavity density and characteristics vary across
+topographical habitats in the tropics? A case study from Xishuangbanna,
+southwest China. <em>Silva Fennica</em> 53(1): 10019. <a
+href="https://doi.org/10.14214/sf.10019">https://doi.org/10.14214/sf.10019</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.14214/sf.10019"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.14214/sf.10019"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>* &amp; Giladi I. (2018). Allometric
+relationships between masses of seed functional components.
+<em>Perspectives in Plant Ecology, Evolution and Systematics</em> 35:
+1–7. <a
+href="https://doi.org/10.1016/j.ppees.2018.09.005">https://doi.org/10.1016/j.ppees.2018.09.005</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.ppees.2018.09.005"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.ppees.2018.09.005"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>* &amp; Moles AT. (2018). Factors shaping
+large-scale gradients in seed physical defence: Seeds are not better
+defended towards the tropics. <em>Global Ecology and Biogeography</em>
+27(4): 417–428. <a
+href="https://doi.org/10.1111/geb.12704">https://doi.org/10.1111/geb.12704</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/geb.12704"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/geb.12704"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Liu J-Y, Zheng Z, Xu X, Dong T* &amp; <strong>Chen S-C</strong>*.
+(2018). Abundance and distribution of cavity trees and the effect of
+topography on cavity presence in a tropical rainforest, southwestern
+China. <em>Canadian Journal of Forest Research</em> 48(9): 1058–1066. <a
+href="https://doi.org/10.1139/cjfr-2018-0044">https://doi.org/10.1139/cjfr-2018-0044</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1139/cjfr-2018-0044"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1139/cjfr-2018-0044"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zhou Y, <strong>Chen S-C</strong>, Hu G, Mwachala G, Yan X* &amp; Wang
+Q*. (2018). Species richness and phylogenetic diversity of seed plants
+across vegetation zones of Mount Kenya, East Africa. <em>Ecology and
+Evolution</em> 8(17): 8930–8939. <a
+href="https://doi.org/10.1002/ece3.4428">https://doi.org/10.1002/ece3.4428</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1002/ece3.4428"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1002/ece3.4428"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Zhang H*, Bonser SP, <strong>Chen S-C</strong>, Hitchcock T &amp; Moles
+AT. (2018). Is the proportion of clonal species higher at higher
+latitudes in Australia? <em>Austral Ecology</em> 43(1): 69–75. <a
+href="https://doi.org/10.1111/aec.12536">https://doi.org/10.1111/aec.12536</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/aec.12536"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/aec.12536"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Hemmings FA, Chen F &amp; Moles AT. (2017).
+Plants do not suffer greater losses to seed predation towards the
+tropics. <em>Global Ecology and Biogeography</em> 26(11): 1283–1291. <a
+href="https://doi.org/10.1111/geb.12636">https://doi.org/10.1111/geb.12636</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/geb.12636"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/geb.12636"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>*, Cornwell WK, Zhang H-X &amp; Moles AT.
+(2017). Plants show more flesh in the tropics: Variation in fruit type
+along latitudinal and climatic gradients. <em>Ecography</em> 40(4):
+531–538. <a
+href="https://doi.org/10.1111/ecog.02010">https://doi.org/10.1111/ecog.02010</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/ecog.02010"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1111/ecog.02010" data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Chen G*, Huang S-Z, <strong>Chen S-C</strong>, Chen Y-H, Liu X and Sun
+W-B*. (2016). Chemical composition of diaspores of the myrmecochorous
+plant Stemona tuberosa Lour. <em>Biochemical Systematics and
+Ecology</em> 64: 31–37. <a
+href="https://doi.org/10.1016/j.bse.2015.11.009">https://doi.org/10.1016/j.bse.2015.11.009</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1016/j.bse.2015.11.009"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.bse.2015.11.009"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Dai Z-C, Fu W, Qi S-S, Zhai D-L, <strong>Chen S-C</strong>, Wan L-Y,
+Huang P &amp; Du D-L*. (2016). Different responses of an invasive clonal
+plant Wedelia trilobata and its native congener to gibberellin:
+Implications for biological invasion. <em>Journal of Chemical
+Ecology</em> 42(2): 85–94. <a
+href="https://doi.org/10.1007/s10886-016-0670-6">https://doi.org/10.1007/s10886-016-0670-6</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1007/s10886-016-0670-6"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1007/s10886-016-0670-6"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>* &amp; Moles AT. (2015). A mammoth mouthful? A
+test of the idea that larger animals ingest larger seeds. <em>Global
+Ecology and Biogeography</em> 24(11): 1269–1280. <a
+href="https://doi.org/10.1111/geb.12346">https://doi.org/10.1111/geb.12346</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1111/geb.12346"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__" data-doi="10.1111/geb.12346"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+<strong>Chen S-C</strong>, Cannon CH*, Kua C-S, Liu J-J &amp; Galbraith
+DW. (2014). Genome size variation in the Fagaceae and its implications
+for trees. <em>Tree Genetics &amp; Genomes</em> 10(4): 977–988. <a
+href="https://doi.org/10.1007/s11295-014-0736-y">https://doi.org/10.1007/s11295-014-0736-y</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1007/s11295-014-0736-y"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1007/s11295-014-0736-y"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-10">
+<li>
+Qi S-S, Dai Z-C, Zhai D-L, <strong>Chen S-C</strong>, Si C-C, Huang P,
+Wang R-P, Zhong Q-X &amp; Du D-L*. (2014). Curvilinear effects of
+invasive plants on plant diversity: plant community invaded by
+Sphagneticola trilobata. <em>PLOS ONE</em> 9(11): e113964. <a
+href="https://doi.org/10.1371/journal.pone.0113964">https://doi.org/10.1371/journal.pone.0113964</a>
+</div>
+<div class="col-md-2">
+<div class="altmetric-embed" data-doi="10.1371/journal.pone.0113964"
+data-hide-no-mentions="true">
+
+</div>
+<p><span class="__dimensions_badge_embed__"
+data-doi="10.1371/journal.pone.0113964"
+data-style="small_rectangle"></span></p>
+</div>
+</div>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><p style="color:darkgreen;font-weight:bold;font-size:30px">Chen Lab</p></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="team.html">Team</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="opportunities.html">Join us</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="cn.html">中文</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<hr>
+<center>
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+2026 –
+<script type="text/javascript">
+  document.write(new Date().getFullYear());
+</script>
+<div class="line-block">Created using <a
+href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a></div>
+</center>
+
+<hr>
+
+<p style="text-align:center;font-size:14px">
+
+Copyright © <a href="mailto:chensichong0528@gmail.com">Si-Chong Chen</a>
+<br>
+Created using <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">rmarkdown</a>
+
+</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
